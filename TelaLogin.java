@@ -2,9 +2,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class TelaLogin extends WindowAdapter{
-    Frame f;
+    Frame f; // Janela principal
+
+    // Construtor da classe TelaLogin
     TelaLogin() {
+        // Inicializando a janela principal
         f = new Frame();
+
+        // Inicializando os componentes da interface
         Label luser = new Label("Usuário:", Label.RIGHT);
         Label lpasswd = new Label("Senha:", Label.RIGHT);
         Button blogin = new Button("Login");
@@ -13,11 +18,13 @@ public class TelaLogin extends WindowAdapter{
         TextField tpasswd = new TextField(15);
         tpasswd.setEchoChar('*');
 
+         // Configurando o layout da janela para GridBagLayout
         f.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
 
+        // Adicionando os componentes à janela para suas posições no layout
         gbc.gridx = 0;
         gbc.gridy = 0;
         f.add(luser, gbc);
@@ -43,14 +50,14 @@ public class TelaLogin extends WindowAdapter{
         f.add(bcancelar, gbc);
         
 
-        
+        // Configurando a janela principal
         f.setTitle("Tela de Login");
         f.setSize(400, 200);
         f.setLocationRelativeTo(null);
         f.setVisible(true);
         f.addWindowListener(this);
 
-    // Adicionando o ActionListener ao botão de login
+    // Adicionando funcionalidade ao botão de Login
     blogin.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             String username = tuser.getText();
@@ -66,14 +73,15 @@ public class TelaLogin extends WindowAdapter{
         }
         });
 
-    // Adicionando o ActionListener ao botão cancelar para fechar a janela
+        // Adicionando funcionalidade ao botão "Cancelar"
         bcancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 f.dispose(); // Fecha a janela principal
             }
         });
     }
-
+    
+    // Método para exibir um diálogo com uma mensagem
     public void showMessageDialog(String message, boolean closeOnOk) {
         Dialog d = new Dialog(f, "Mensagem");
         d.setLayout(new FlowLayout());
@@ -84,10 +92,12 @@ public class TelaLogin extends WindowAdapter{
                 d.setVisible(false);
                 d.dispose();
                 if (closeOnOk) {
-                    f.dispose(); // Fecha a janela principal se o login for bem-sucedido
+                    f.dispose(); // Fecha a janela principal se o login for comfirmado
                 }
             }
         });
+
+        // Adicionando componentes ao diálogo
         d.add(lbl);
         d.add(ok);
         d.setSize(250, 100);
@@ -95,6 +105,7 @@ public class TelaLogin extends WindowAdapter{
         d.setVisible(true);
     }
 
+    // Método chamado ao fechar a janela principal
     public void windowClosing(WindowEvent e) {
         f.dispose();
     }
